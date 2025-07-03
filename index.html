@@ -90,21 +90,6 @@
           <p>My journey in software development began with a curiosity about how things work, which led me to pursue a career where I can turn ideas into reality through code. I specialize in the MERN stack (MongoDB, Express.js, React.js, Node.js) and have extensive experience with Python, Flask, and cloud platforms like AWS.</p>
           
           <div class="about-details">
-            <div class="detail-item">
-              <i class="fas fa-envelope"></i>
-              <div>
-                <h4>Email</h4>
-                <a href="mailto:cyberfahad72@gmail.com">cyberfahad72@gmail.com</a>
-              </div>
-            </div>
-            
-            <div class="detail-item">
-              <i class="fas fa-map-marker-alt"></i>
-              <div>
-                <h4>Location</h4>
-                <p>Godhra , Gujarat</p>
-              </div>
-            </div>
             
             <div class="detail-item">
               <i class="fas fa-graduation-cap"></i>
@@ -118,53 +103,7 @@
           
           <div class="about-cta">
             <a href="#contact" class="btn btn-primary">Hire Me</a>
-            <a href="#" class="btn btn-outline">Download CV</a>
-          </div>
-        </div>
-        
-        <div class="about-skills">
-          <div class="skill-category">
-            <h4>Frontend</h4>
-            <div class="skills-grid">
-              <div class="skill-item">
-                <i class="fab fa-react"></i>
-                <span>React.js</span>
-              </div>
-              <div class="skill-item">
-                <i class="fab fa-js"></i>
-                <span>JavaScript</span>
-              </div>
-              <div class="skill-item">
-                <i class="fab fa-html5"></i>
-                <span>HTML5</span>
-              </div>
-              <div class="skill-item">
-                <i class="fab fa-css3-alt"></i>
-                <span>CSS3</span>
-              </div>
-            </div>
-          </div>
-          
-          <div class="skill-category">
-            <h4>Backend</h4>
-            <div class="skills-grid">
-              <div class="skill-item">
-                <i class="fab fa-node-js"></i>
-                <span>Node.js</span>
-              </div>
-              <div class="skill-item">
-                <i class="fab fa-python"></i>
-                <span>Python</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-database"></i>
-                <span>MongoDB</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-server"></i>
-                <span>REST APIs</span>
-              </div>
-            </div>
+            <a href="../cv11992651_file.pdf" class="btn btn-outline" id="downloadCvBtn" download="Fahad_Hayath_CV.pdf">Download CV</a>
           </div>
         </div>
       </div>
@@ -358,7 +297,7 @@
             </div>
           </div>
         </div>
-<!--         No change yet in code -->
+
         <!-- Backend Card -->
         <div class="skills-category-card">
           <div class="skills-card-header">
@@ -634,6 +573,22 @@
   </script>
 
   <script>
+    // Handle CV download and view
+    document.getElementById('downloadCvBtn').addEventListener('click', function(e) {
+      const cvUrl = this.getAttribute('href');
+      
+      // Open in new tab first
+      const newTab = window.open(cvUrl, '_blank');
+      
+      // If new tab was blocked, show a message
+      if (!newTab || newTab.closed || typeof newTab.closed == 'undefined') {
+        alert('Please allow pop-ups for this site to view the CV in a new tab.');
+      }
+      
+      // Let the default download behavior happen
+      // The download attribute on the link will handle this
+    });
+
     // Footer particles animation
     document.addEventListener('DOMContentLoaded', () => {
       const particlesContainer = document.getElementById('footerParticles');
