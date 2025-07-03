@@ -8,7 +8,7 @@ Welcome to my **personal portfolio website** – a sleek and responsive single-p
 
 ## 🖼️ Preview
 
-![Portfolio Screenshot](../Screenshot%202025-07-03%20125420.png) <!-- Optional: Replace with actual image -->
+![Portfolio Screenshot](Screenshot%202025-07-03%20125420.png) <!-- Optional: Replace with actual image -->
 
 ---
 
