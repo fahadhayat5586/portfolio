@@ -29,7 +29,7 @@
   <!-- Navigation -->
   <header class="navbar">
     <div class="container">
-      <a href="#" class="logo">FH</a>
+      <a href="#" class="logo">FHD</a>
       
       <!-- Mobile Menu Button -->
       <button class="mobile-menu-btn" aria-label="Toggle menu">
@@ -37,14 +37,18 @@
         <span class="menu-line"></span>
         <span class="menu-line"></span>
       </button>
+      <!-- Theme Toggle (floating, styled in CSS) -->
+      <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+        <i class="fas fa-sun"></i>
+      </button>
       
       <nav class="nav-links" id="mainNav">
         <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a class="nav-link" href="#about">About</a></li>
+          <li><a class="nav-link" href="#projects">Projects</a></li>
+          <li><a class="nav-link" href="#experience">Experience</a></li>
+          <li><a class="nav-link" href="#skills">Skills</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -53,6 +57,7 @@
   <!-- Hero Section -->
   <section class="hero" id="home">
     <div class="container">
+      
       <div class="hero-content">
         <h1 class="hero-title">
           <span class="greeting">Hi, I'm</span>
@@ -579,10 +584,8 @@
     </div>
   </footer>
 
-  <!-- ScrollReveal Library -->
   <script src="https://unpkg.com/scrollreveal"></script>
-  
-  <!-- Main JavaScript -->
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
   <script src="main.js"></script>
 
   <script>
@@ -666,6 +669,11 @@
       }
     });
   </script>
+
+  <!-- Back To Top Button -->
+  <button id="backToTop" class="back-to-top" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
   <script>
     // Typing animation for name
