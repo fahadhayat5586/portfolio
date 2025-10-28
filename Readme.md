@@ -25,13 +25,11 @@ Welcome to my **personal portfolio website** – a sleek and responsive single-p
 
 ```
 portfolio/
-├── assets/           # Images, icons, or media
-├── css/              # Custom CSS stylesheets
-├── js/               # JavaScript scripts
-├── index.html        # Main homepage
-├── about.html        # (Optional) About page
-├── contact.html      # (Optional) Contact form
-└── README.md         # This file
+├── index.html                         # Main homepage
+├── styles.css                         # Stylesheet
+├── main.js                            # JavaScript
+├── Screenshot 2025-07-03 125420.png   # Preview image
+└── Readme.md                          # This file
 ```
 
 ---
