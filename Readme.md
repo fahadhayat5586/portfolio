@@ -68,7 +68,7 @@ vercel deploy
 If you'd like to collaborate or get in touch:
 
 - 🔗 [GitHub](https://github.com/fahadhayat5586)
-- ✉️ Email: fahadhayat5586@gmail.com
+- ✉️ Email: cyberfahad72@gmail.com
 - 💼 LinkedIn: *Coming soon*
 
 ---
