@@ -631,20 +631,29 @@
   </script>
 
   <script>
-    // Handle CV download and view
+    // Handle CV download
     document.getElementById('downloadCvBtn').addEventListener('click', function(e) {
       const cvUrl = this.getAttribute('href');
+      const fileName = this.getAttribute('download');
       
-      // Open in new tab first
-      const newTab = window.open(cvUrl, '_blank');
-      //
-      // If new tab was blocked, show a message
-      if (!newTab || newTab.closed || typeof newTab.closed == 'undefined') {
-        alert('Please allow pop-ups for this site to view the CV in a new tab.');
-      }
+      // Create a temporary link element to trigger download
+      const link = document.createElement('a');
+      link.href = cvUrl;
+      link.download = fileName || 'Resume.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
       
-      // Let the default download behavior happen
-      // The download attribute on the link will handle this
+      // If file doesn't exist, notify user
+      fetch(cvUrl, { method: 'HEAD' })
+        .then(response => {
+          if (!response.ok) {
+            alert('Resume file not found. Please contact the site owner.');
+          }
+        })
+        .catch(() => {
+          console.log('Resume download initiated');
+        });
     });
 
     // Footer particles animation
