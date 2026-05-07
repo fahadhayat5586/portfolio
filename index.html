@@ -3,743 +3,1332 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fahad Hayat | Full-Stack Developer</title>
-  <meta name="description" content="Portfolio of Fahad Hayat, a Full-Stack Developer specializing in MERN stack, cloud solutions, and modern web development.">
-  <meta name="keywords" content="Full-Stack Developer, MERN Stack, Web Development, Cloud Solutions, Portfolio">
-  <meta name="author" content="Fahad Hayat">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.ico">
-  
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Google Fonts -->
+  <title>fahad@hayat:~$</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- CSS -->
-  <link rel="stylesheet" href="styles.css">
-  
-  <!-- Theme Color for Mobile Browsers -->
-  <meta name="theme-color" content="#0f172a">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --bg2: #161b22;
+      --bg3: #21262d;
+      --border: #30363d;
+      --border-bright: #484f58;
+      --text: #e6edf3;
+      --text-dim: #7d8590;
+      --text-muted: #484f58;
+      --green: #3fb950;
+      --green-dim: #238636;
+      --blue: #58a6ff;
+      --blue-dim: #1f6feb;
+      --purple: #bc8cff;
+      --orange: #d29922;
+      --red: #f85149;
+      --teal: #39d353;
+      --yellow: #e3b341;
+      --pink: #ff7b72;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+      --font-sans: 'Syne', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-mono);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* SCANLINE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* CUSTOM CURSOR */
+    body { cursor: none; }
+    #cursor {
+      position: fixed;
+      width: 10px;
+      height: 20px;
+      background: var(--green);
+      opacity: 0.9;
+      pointer-events: none;
+      z-index: 10000;
+      animation: blink 1s step-end infinite;
+      mix-blend-mode: screen;
+      transform: translate(-2px, -2px);
+    }
+    @keyframes blink { 0%,100%{opacity:0.9} 50%{opacity:0} }
+
+    /* TOP BAR */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 40px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      z-index: 1000;
+      font-size: 12px;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .traffic-lights {
+      display: flex;
+      gap: 6px;
+    }
+    .tl {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+    }
+    .tl.red { background: #ff5f57; }
+    .tl.yellow { background: #febc2e; }
+    .tl.green { background: #28c840; }
+
+    .topbar-title {
+      color: var(--text-dim);
+      letter-spacing: 0.03em;
+    }
+
+    .topbar-title span { color: var(--green); }
+
+    .topbar-nav {
+      display: flex;
+      gap: 0;
+    }
+
+    .topbar-nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 0 14px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      border-left: 1px solid var(--border);
+      transition: all 0.15s;
+      position: relative;
+    }
+    .topbar-nav a:hover {
+      color: var(--text);
+      background: var(--bg3);
+    }
+    .topbar-nav a::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--blue);
+      transform: scaleX(0);
+      transition: transform 0.2s;
+    }
+    .topbar-nav a:hover::before { transform: scaleX(1); }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      display: inline-block;
+      margin-right: 4px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    /* SIDEBAR */
+    .layout {
+      display: flex;
+      margin-top: 40px;
+      min-height: calc(100vh - 40px);
+    }
+
+    .sidebar {
+      width: 220px;
+      min-width: 220px;
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 40px;
+      bottom: 0;
+      overflow-y: auto;
+      font-size: 12px;
+    }
+
+    .sidebar-section {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-header {
+      padding: 8px 12px;
+      color: var(--text-muted);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      user-select: none;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px 5px 24px;
+      color: var(--text-dim);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.1s;
+      font-size: 12px;
+    }
+    .sidebar-item:hover { background: var(--bg3); color: var(--text); }
+    .sidebar-item.active { background: rgba(88,166,255,0.08); color: var(--blue); }
+    .sidebar-item i { font-size: 10px; width: 12px; }
+    .file-icon { font-size: 12px; }
+
+    /* MAIN CONTENT */
+    .main {
+      margin-left: 220px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* TAB BAR */
+    .tabs {
+      height: 35px;
+      display: flex;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+    .tabs::-webkit-scrollbar { height: 0; }
+
+    .tab {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 14px;
+      font-size: 11px;
+      color: var(--text-muted);
+      border-right: 1px solid var(--border);
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+    .tab:hover { color: var(--text-dim); background: var(--bg2); }
+    .tab.active {
+      color: var(--text);
+      background: var(--bg2);
+      border-top: 1px solid var(--blue);
+    }
+    .tab-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+    }
+
+    /* CONTENT AREA */
+    .content {
+      flex: 1;
+      padding: 2.5rem 3rem;
+      max-width: 900px;
+    }
+
+    /* SECTIONS */
+    section { margin-bottom: 5rem; }
+    section:last-child { margin-bottom: 0; }
+
+    /* HERO */
+    .hero {
+      padding-top: 1rem;
+    }
+
+    .hero-prompt {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-bottom: 0.5rem;
+    }
+    .prompt-user { color: var(--green); font-weight: 700; }
+    .prompt-host { color: var(--blue); }
+    .prompt-path { color: var(--purple); }
+    .prompt-dollar { color: var(--text-dim); }
+
+    .hero-cmd {
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-cmd span { color: var(--blue); }
+
+    .hero-output {
+      padding-left: 1rem;
+      border-left: 2px solid var(--border);
+      margin-bottom: 3rem;
+    }
+
+    .ascii-name {
+      font-size: clamp(6px, 1.6vw, 13px);
+      line-height: 1.1;
+      color: var(--green);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      font-style: normal;
+      white-space: pre;
+    }
+
+    .hero-bio {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.8;
+      max-width: 600px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-bio .kw { color: var(--purple); }
+    .hero-bio .str { color: var(--orange); }
+    .hero-bio .fn { color: var(--blue); }
+    .hero-bio .num { color: var(--pink); }
+    .hero-bio .cm { color: var(--text-muted); font-style: italic; }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 2rem;
+    }
+    .tag {
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--text-dim);
+      background: var(--bg3);
+      letter-spacing: 0.04em;
+    }
+    .tag.green { border-color: var(--green-dim); color: var(--green); background: rgba(63,185,80,0.06); }
+    .tag.blue { border-color: var(--blue-dim); color: var(--blue); background: rgba(88,166,255,0.06); }
+    .tag.purple { border-color: #6e40c9; color: var(--purple); background: rgba(188,140,255,0.06); }
+
+    .hero-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      background: var(--bg2);
+      transition: all 0.2s;
+      letter-spacing: 0.03em;
+    }
+    .btn-link:hover {
+      border-color: var(--green);
+      color: var(--green);
+      background: rgba(63,185,80,0.06);
+    }
+    .btn-link.primary {
+      border-color: var(--green);
+      color: var(--green);
+      background: rgba(63,185,80,0.08);
+    }
+    .btn-link.primary:hover {
+      background: rgba(63,185,80,0.16);
+    }
+
+    /* SECTION HEADER */
+    .sec-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .sec-comment {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-style: italic;
+      letter-spacing: 0.04em;
+    }
+    .sec-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .sec-num {
+      font-size: 11px;
+      color: var(--text-muted);
+      min-width: 24px;
+    }
+
+    /* SKILL TREE */
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+    }
+    .skill-cell {
+      background: var(--bg);
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: background 0.15s;
+    }
+    .skill-cell:hover { background: var(--bg3); }
+    .skill-name {
+      font-size: 12px;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .skill-type {
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+    .skill-bar {
+      height: 2px;
+      background: var(--border);
+      margin-top: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      background: var(--green);
+      animation: growBar 1.5s ease-out forwards;
+      width: 0;
+    }
+    @keyframes growBar { to { width: var(--w, 80%); } }
+    .skill-fill.blue { background: var(--blue); }
+    .skill-fill.purple { background: var(--purple); }
+    .skill-fill.orange { background: var(--orange); }
+
+    /* EXPERIENCE - DIFF VIEW */
+    .diff-block {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+    .diff-header {
+      background: var(--bg3);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+    }
+    .diff-filename { color: var(--blue); }
+    .diff-badge {
+      padding: 2px 8px;
+      font-size: 10px;
+      background: rgba(63,185,80,0.15);
+      color: var(--green);
+      border: 1px solid rgba(63,185,80,0.3);
+      letter-spacing: 0.06em;
+    }
+    .diff-badge.current { background: rgba(88,166,255,0.15); color: var(--blue); border-color: rgba(88,166,255,0.3); }
+    .diff-body { padding: 1rem 1.5rem; font-size: 12px; line-height: 1.9; }
+    .diff-role { font-size: 15px; color: var(--text); font-weight: 700; margin-bottom: 2px; font-family: var(--font-sans); letter-spacing: -0.02em; }
+    .diff-company { color: var(--purple); margin-bottom: 1rem; }
+    .diff-date { color: var(--text-muted); font-size: 11px; }
+    .diff-item {
+      display: flex;
+      gap: 8px;
+      padding: 2px 0;
+      color: var(--text-dim);
+    }
+    .diff-plus { color: var(--green); flex-shrink: 0; }
+    .diff-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .tech-pill {
+      padding: 2px 8px;
+      font-size: 10px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      letter-spacing: 0.04em;
+    }
+
+    /* PROJECTS - CARD TERMINAL */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .project-card {
+      background: var(--bg);
+      padding: 20px;
+      transition: background 0.15s;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .project-card:hover { background: var(--bg2); }
+    .project-lang {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+    .lang-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+    .project-name {
+      font-size: 13px;
+      color: var(--blue);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .project-desc { font-size: 11px; color: var(--text-muted); line-height: 1.7; }
+    .project-stats {
+      display: flex;
+      gap: 12px;
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: auto;
+    }
+    .project-stats span { display: flex; align-items: center; gap: 4px; }
+
+    /* CERTIFICATIONS */
+    .cert-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .cert-item {
+      background: var(--bg);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: background 0.15s;
+    }
+    .cert-item:hover { background: var(--bg2); }
+    .cert-left { display: flex; align-items: center; gap: 14px; }
+    .cert-icon {
+      width: 32px; height: 32px;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .cert-name { font-size: 12px; color: var(--text); }
+    .cert-issuer { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+    .cert-status {
+      font-size: 10px;
+      padding: 3px 8px;
+      border: 1px solid;
+      letter-spacing: 0.06em;
+      flex-shrink: 0;
+    }
+    .cert-status.valid { border-color: rgba(63,185,80,0.4); color: var(--green); background: rgba(63,185,80,0.07); }
+    .cert-status.expired { border-color: var(--border); color: var(--text-muted); }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+    .contact-cell {
+      background: var(--bg);
+      padding: 20px;
+      transition: background 0.15s;
+    }
+    .contact-cell:hover { background: var(--bg2); }
+    .contact-cell a {
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 13px;
+    }
+    .contact-cell a:hover { text-decoration: underline; }
+    .contact-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+
+    /* TERMINAL BLOCK */
+    .terminal {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+    .term-bar {
+      background: var(--bg3);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .term-title { flex: 1; text-align: center; }
+    .term-body { padding: 1.2rem 1.5rem; font-size: 12px; }
+    .term-line {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 6px;
+      align-items: flex-start;
+    }
+    .term-ps1 { color: var(--green); flex-shrink: 0; white-space: nowrap; }
+    .term-cmd { color: var(--text); }
+    .term-out { color: var(--text-dim); margin-bottom: 12px; padding-left: 0; line-height: 1.8; }
+    .term-out .g { color: var(--green); }
+    .term-out .b { color: var(--blue); }
+    .term-out .p { color: var(--purple); }
+    .term-out .d { color: var(--text-muted); }
+    .term-input {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      align-items: center;
+    }
+    #termCmd {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      outline: none;
+    }
+    .term-cursor {
+      width: 8px; height: 14px;
+      background: var(--green);
+      display: inline-block;
+      animation: blink 1s step-end infinite;
+    }
+
+    /* FOOTER */
+    .footer-bar {
+      border-top: 1px solid var(--border);
+      background: var(--bg2);
+      padding: 8px 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      margin-left: 220px;
+    }
+    .footer-bar span { color: var(--green); }
+
+    /* LINE NUMBERS */
+    .ln-wrap {
+      display: flex;
+      gap: 2rem;
+    }
+    .ln-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 1.9;
+      user-select: none;
+      min-width: 28px;
+      border-right: 1px solid var(--border);
+      padding-right: 12px;
+      flex-shrink: 0;
+    }
+
+    /* ABOUT */
+    .code-block {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      font-size: 12px;
+      line-height: 1.9;
+    }
+    .line { display: block; }
+    .kw { color: var(--purple); }
+    .fn { color: var(--blue); }
+    .str { color: var(--orange); }
+    .cm { color: var(--text-muted); font-style: italic; }
+    .num { color: var(--pink); }
+    .prop { color: var(--green); }
+    .vr { color: var(--text); }
+
+    /* ANIMATIONS */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(8px);
+      animation: fadeUp 0.5s ease forwards;
+    }
+    @keyframes fadeUp { to { opacity: 1; transform: none; } }
+
+    [data-delay="1"] { animation-delay: 0.1s; }
+    [data-delay="2"] { animation-delay: 0.2s; }
+    [data-delay="3"] { animation-delay: 0.3s; }
+    [data-delay="4"] { animation-delay: 0.4s; }
+    [data-delay="5"] { animation-delay: 0.5s; }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-bright); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .footer-bar { margin-left: 0; }
+      .topbar-nav { display: none; }
+      .content { padding: 1.5rem; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .topbar { padding: 0 1rem; }
+    }
+
+    @media (max-width: 600px) {
+      .ascii-name { font-size: 5px; }
+      .project-grid { grid-template-columns: 1fr; }
+      .skill-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* HOVER HIGHLIGHT for entire rows */
+    .hover-row {
+      transition: background 0.1s;
+      padding: 2px 8px;
+      margin: 0 -8px;
+    }
+    .hover-row:hover { background: rgba(88,166,255,0.06); }
+
+    /* Selection highlight */
+    ::selection { background: rgba(88,166,255,0.2); color: var(--text); }
+  </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <header class="navbar">
-    <div class="container">
-      <a href="#" class="logo">FHD</a>
-      
-      <!-- Mobile Menu Button -->
-      <button class="mobile-menu-btn" aria-label="Toggle menu">
-        <span class="menu-line"></span>
-        <span class="menu-line"></span>
-        <span class="menu-line"></span>
-      </button>
-      <!-- Theme Toggle (floating, styled in CSS) -->
-      <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
-        <i class="fas fa-sun"></i>
-      </button>
-      
-      <nav class="nav-links" id="mainNav">
-        <ul>
-          <li><a class="nav-link" href="#about">About</a></li>
-          <li><a class="nav-link" href="#projects">Projects</a></li>
-          <li><a class="nav-link" href="#experience">Experience</a></li>
-          <li><a class="nav-link" href="#skills">Skills</a></li>
-          <li><a class="nav-link" href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
 
-  <!-- Hero Section -->
-  <section class="hero" id="home">
-    <div class="container">
-      
-      <div class="hero-content">
-        <h1 class="hero-title">
-          <span class="greeting">Hi, I'm</span>
-          <span class="name"><span id="typing-text">Fahad Hayat</span><span class="cursor">|</span></span>
-        </h1>
-        <p class="hero-subtitle">
-          I build exceptional digital experiences with modern web technologies and cloud solutions.
-        </p>
-        <div class="hero-cta">
-          <a href="#projects" class="btn btn-primary">View My Work</a>
-          <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-        </div>
-      </div>
-      
-      <!-- <div class="hero-image">
-        <div class="image-wrapper">
-          <img src="assets/profile.jpg" alt="Fahad Hayat" class="profile-image">
-        </div>
-      </div> -->
-    </div>
-  </section>
+<div id="cursor"></div>
 
-  <!-- About Section -->
-  <section id="about" class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">About Me</h2>
-        <p class="section-subtitle">Get to know me better</p>
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="topbar-left">
+    <div class="traffic-lights">
+      <div class="tl red"></div>
+      <div class="tl yellow"></div>
+      <div class="tl green"></div>
+    </div>
+    <span class="topbar-title"><span class="prompt-user">fahad</span><span style="color:var(--text-muted)">@</span><span class="prompt-host">hayat</span><span style="color:var(--text-muted)">:~</span><span style="color:var(--text-dim)">$ portfolio.sh</span></span>
+  </div>
+  <nav class="topbar-nav">
+    <a href="#about">about.ts</a>
+    <a href="#experience">work.diff</a>
+    <a href="#projects">repos/</a>
+    <a href="#skills">tech.json</a>
+    <a href="#contact">contact.sh</a>
+  </nav>
+  <div class="topbar-right">
+    <span><span class="status-dot"></span>available for work</span>
+  </div>
+</header>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-header">▾ EXPLORER</div>
+      <a href="#about" class="sidebar-item active">
+        <i class="fas fa-code"></i><span class="file-icon" style="color:var(--blue)">◆</span> about.ts
+      </a>
+      <a href="#experience" class="sidebar-item">
+        <i class="fas fa-code"></i><span class="file-icon" style="color:var(--orange)">◆</span> work.diff
+      </a>
+      <a href="#projects" class="sidebar-item">
+        <i class="fas fa-code"></i><span class="file-icon" style="color:var(--green)">◆</span> repos/
+      </a>
+      <a href="#skills" class="sidebar-item">
+        <i class="fas fa-code"></i><span class="file-icon" style="color:var(--purple)">◆</span> tech.json
+      </a>
+      <a href="#certs" class="sidebar-item">
+        <i class="fas fa-code"></i><span class="file-icon" style="color:var(--yellow)">◆</span> certs.log
+      </a>
+      <a href="#contact" class="sidebar-item">
+        <i class="fas fa-code"></i><span class="file-icon" style="color:var(--pink)">◆</span> contact.sh
+      </a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-header">▾ GIT BRANCHES</div>
+      <div class="sidebar-item"><i class="fas fa-code-branch" style="color:var(--green)"></i> main</div>
+      <div class="sidebar-item"><i class="fas fa-code-branch"></i> dev</div>
+      <div class="sidebar-item"><i class="fas fa-code-branch"></i> freelance</div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-header">▾ OUTLINE</div>
+      <div class="sidebar-item" style="padding-left:32px; font-size:11px">
+        <i class="fas fa-at" style="color:var(--purple)"></i> interface Dev
       </div>
-      
-      <div class="about-content">
-        <div class="about-text">
-          <p>Hello! I'm Fahad Hayat, a passionate Full-Stack Developer with a strong foundation in modern web technologies and cloud solutions. With over 2 years of professional experience, I've had the privilege of working on diverse projects ranging from AI-powered applications to scalable e-commerce platforms.</p>
-          
-          <p>My journey in software development began with a curiosity about how things work, which led me to pursue a career where I can turn ideas into reality through code. I specialize in the MERN stack (MongoDB, Express.js, React.js, Node.js) and have extensive experience with Python, Flask, and cloud platforms like AWS.</p>
-          
-          <div class="about-details">
-            
-            <div class="detail-item">
-              <i class="fas fa-graduation-cap"></i>
+      <div class="sidebar-item" style="padding-left:32px; font-size:11px">
+        <i class="fas fa-at" style="color:var(--blue)"></i> fn whoami()
+      </div>
+      <div class="sidebar-item" style="padding-left:32px; font-size:11px">
+        <i class="fas fa-at" style="color:var(--orange)"></i> fn skills[]
+      </div>
+      <div class="sidebar-item" style="padding-left:32px; font-size:11px">
+        <i class="fas fa-at" style="color:var(--green)"></i> fn projects[]
+      </div>
+    </div>
+    <div style="padding: 16px 12px; font-size: 10px; color: var(--text-muted); letter-spacing: 0.06em; line-height: 1.8;">
+      <div>Ln 1, Col 1</div>
+      <div>Spaces: 2</div>
+      <div>UTF-8</div>
+      <div style="color: var(--green); margin-top: 4px;">TypeScript ✓</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- TABS -->
+    <div class="tabs">
+      <a href="#about" class="tab active"><span class="tab-dot" style="background:var(--blue)"></span>about.ts</a>
+      <a href="#experience" class="tab"><span class="tab-dot" style="background:var(--orange)"></span>work.diff</a>
+      <a href="#projects" class="tab"><span class="tab-dot" style="background:var(--green)"></span>repos/</a>
+      <a href="#skills" class="tab"><span class="tab-dot" style="background:var(--purple)"></span>tech.json</a>
+      <a href="#contact" class="tab"><span class="tab-dot" style="background:var(--pink)"></span>contact.sh</a>
+    </div>
+
+    <div class="content">
+
+      <!-- HERO / ABOUT -->
+      <section id="about" class="hero">
+        <div class="hero-prompt fade-in" data-delay="1">
+          <span class="prompt-user">fahad</span><span style="color:var(--text-muted)">@</span><span class="prompt-host">dev-machine</span><span style="color:var(--text-muted)">:</span><span class="prompt-path">~/portfolio</span><span class="prompt-dollar">$</span>
+        </div>
+        <div class="hero-cmd fade-in" data-delay="2">
+          <span>cat</span> <span style="color:var(--text)">README.md</span>
+        </div>
+
+        <div class="hero-output fade-in" data-delay="3">
+          <pre class="ascii-name">
+███████╗ █████╗ ██╗  ██╗ █████╗ ██████╗     ██╗  ██╗ █████╗ ██╗   ██╗ █████╗ ████████╗
+██╔════╝██╔══██╗██║  ██║██╔══██╗██╔══██╗    ██║  ██║██╔══██╗╚██╗ ██╔╝██╔══██╗╚══██╔══╝
+█████╗  ███████║███████║███████║██║  ██║    ███████║███████║ ╚████╔╝ ███████║   ██║   
+██╔══╝  ██╔══██║██╔══██║██╔══██║██║  ██║    ██╔══██║██╔══██║  ╚██╔╝  ██╔══██║   ██║   
+██║     ██║  ██║██║  ██║██║  ██║██████╔╝    ██║  ██║██║  ██║   ██║   ██║  ██║   ██║   
+╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝     ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝   ╚═╝</pre>
+
+          <div class="hero-tags">
+            <span class="tag green">MERN Stack</span>
+            <span class="tag blue">Cloud Infra</span>
+            <span class="tag purple">Full-Stack Dev</span>
+            <span class="tag">Vadodara, IN</span>
+            <span class="tag green">Open to Work</span>
+          </div>
+
+          <div class="hero-bio">
+            <span class="cm">// Full-Stack Developer · 2+ years professional experience</span><br>
+            <span class="kw">const</span> <span class="vr">fahad</span> = {<br>
+            &nbsp;&nbsp;<span class="prop">role</span>: <span class="str">"Full-Stack Developer"</span>,<br>
+            &nbsp;&nbsp;<span class="prop">stack</span>: [<span class="str">"React"</span>, <span class="str">"Node.js"</span>, <span class="str">"MongoDB"</span>, <span class="str">"Python"</span>],<br>
+            &nbsp;&nbsp;<span class="prop">cloud</span>: [<span class="str">"AWS"</span>, <span class="str">"GCP"</span>, <span class="str">"Azure"</span>],<br>
+            &nbsp;&nbsp;<span class="prop">building</span>: <span class="str">"AI-powered + scalable web apps"</span>,<br>
+            &nbsp;&nbsp;<span class="prop">education</span>: <span class="str">"BTech IT · Parul University (2023–27)"</span>,<br>
+            &nbsp;&nbsp;<span class="prop">satisfaction</span>: <span class="num">5</span>/<span class="num">5</span>&nbsp;<span class="cm">// client rating</span><br>
+            };
+          </div>
+
+          <div class="hero-links">
+            <a href="https://github.com/fahadhaya72" target="_blank" class="btn-link primary">
+              <i class="fab fa-github"></i> github/fahadhaya72
+            </a>
+            <a href="https://linkedin.com/in/fahadhayat" target="_blank" class="btn-link">
+              <i class="fab fa-linkedin"></i> linkedin
+            </a>
+            <a href="mailto:cyberfahad72@gmail.com" class="btn-link">
+              <i class="fas fa-envelope"></i> email me
+            </a>
+            <a href="FHDresume.pdf" download class="btn-link">
+              <i class="fas fa-download"></i> resume.pdf
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section id="experience">
+        <div class="sec-header">
+          <span class="sec-num">01</span>
+          <span class="sec-comment">// work experience — diff format</span>
+          <div class="sec-line"></div>
+        </div>
+
+        <div class="diff-block fade-in" data-delay="1">
+          <div class="diff-header">
+            <span class="diff-filename">work/rapido__intern.diff</span>
+            <span class="diff-badge">COMPLETED</span>
+          </div>
+          <div class="diff-body">
+            <div class="diff-role">Frontend Developer Intern</div>
+            <div class="diff-company">@ Rapido · Vadodara</div>
+            <div class="diff-date">Nov 2024 → May 2025</div>
+            <br>
+            <div class="diff-item"><span class="diff-plus">+</span><span>Developed responsive web apps with React.js and TypeScript</span></div>
+            <div class="diff-item"><span class="diff-plus">+</span><span>Implemented pixel-perfect UI from Figma designs</span></div>
+            <div class="diff-item"><span class="diff-plus">+</span><span>Optimized performance — cut load times by <strong style="color:var(--green)">30%</strong></span></div>
+            <div class="diff-item"><span class="diff-plus">+</span><span>Participated in code reviews & knowledge sharing</span></div>
+            <div class="diff-tech">
+              <span class="tech-pill">React.js</span>
+              <span class="tech-pill">TypeScript</span>
+              <span class="tech-pill">Material-UI</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="diff-block fade-in" data-delay="2">
+          <div class="diff-header">
+            <span class="diff-filename">work/fuelflux__senior.diff</span>
+            <span class="diff-badge">COMPLETED</span>
+          </div>
+          <div class="diff-body">
+            <div class="diff-role">Senior Web Developer</div>
+            <div class="diff-company">@ FuelFlux Technology</div>
+            <div class="diff-date">May 2025 → Sep 2025</div>
+            <br>
+            <div class="diff-item"><span class="diff-plus">+</span><span>Led full MERN stack client project development</span></div>
+            <div class="diff-item"><span class="diff-plus">+</span><span>Built responsive, cross-browser compatible frontends</span></div>
+            <div class="diff-item"><span class="diff-plus">+</span><span>Implemented SEO strategies with marketing team</span></div>
+            <div class="diff-item"><span class="diff-plus">+</span><span>Customized themes, plugins and reusable components</span></div>
+            <div class="diff-tech">
+              <span class="tech-pill">React</span>
+              <span class="tech-pill">Tailwind</span>
+              <span class="tech-pill">Node.js</span>
+              <span class="tech-pill">Express</span>
+              <span class="tech-pill">MongoDB</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="diff-block fade-in" data-delay="3">
+          <div class="diff-header">
+            <span class="diff-filename">work/freelance__ongoing.diff</span>
+            <span class="diff-badge current">ACTIVE</span>
+          </div>
+          <div class="diff-body">
+            <div class="diff-role">Freelance Full-Stack Developer</div>
+            <div class="diff-company">@ Self-Employed</div>
+            <div class="diff-date">May 2025 → present</div>
+            <br>
+            <div class="diff-item"><span class="diff-plus">+</span><span>Deploy full-stack apps with React, Node.js, MongoDB</span></div>
+            <div class="diff-item"><span class="diff-plus">+</span><span>Integrate third-party APIs and payment gateways</span></div>
+            <div class="diff-item"><span class="diff-plus">+</span><span>Optimized performance across client deliverables</span></div>
+            <div class="diff-item"><span class="diff-plus">+</span><span>Maintained <strong style="color:var(--green)">5/5</strong> client satisfaction rating</span></div>
+            <div class="diff-tech">
+              <span class="tech-pill">React.js</span>
+              <span class="tech-pill">Node.js</span>
+              <span class="tech-pill">MongoDB</span>
+              <span class="tech-pill">REST APIs</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills">
+        <div class="sec-header">
+          <span class="sec-num">02</span>
+          <span class="sec-comment">// tech.json — stack overview</span>
+          <div class="sec-line"></div>
+        </div>
+
+        <div class="code-block fade-in" style="margin-bottom: 1px;">
+          <span class="line"><span class="kw">export const</span> <span class="fn">techStack</span> = {</span>
+        </div>
+        <div class="skill-grid">
+          <div class="skill-cell">
+            <div class="skill-name">React.js</div>
+            <div class="skill-type">FRONTEND</div>
+            <div class="skill-bar"><div class="skill-fill" style="--w:90%"></div></div>
+          </div>
+          <div class="skill-cell">
+            <div class="skill-name">TypeScript</div>
+            <div class="skill-type">LANGUAGE</div>
+            <div class="skill-bar"><div class="skill-fill blue" style="--w:78%"></div></div>
+          </div>
+          <div class="skill-cell">
+            <div class="skill-name">Node.js</div>
+            <div class="skill-type">BACKEND</div>
+            <div class="skill-bar"><div class="skill-fill" style="--w:85%"></div></div>
+          </div>
+          <div class="skill-cell">
+            <div class="skill-name">Python</div>
+            <div class="skill-type">LANGUAGE</div>
+            <div class="skill-bar"><div class="skill-fill orange" style="--w:75%"></div></div>
+          </div>
+          <div class="skill-cell">
+            <div class="skill-name">MongoDB</div>
+            <div class="skill-type">DATABASE</div>
+            <div class="skill-bar"><div class="skill-fill" style="--w:82%"></div></div>
+          </div>
+          <div class="skill-cell">
+            <div class="skill-name">Express.js</div>
+            <div class="skill-type">BACKEND</div>
+            <div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div>
+          </div>
+          <div class="skill-cell">
+            <div class="skill-name">AWS</div>
+            <div class="skill-type">CLOUD</div>
+            <div class="skill-bar"><div class="skill-fill blue" style="--w:70%"></div></div>
+          </div>
+          <div class="skill-cell">
+            <div class="skill-name">Docker</div>
+            <div class="skill-type">DEVOPS</div>
+            <div class="skill-bar"><div class="skill-fill blue" style="--w:65%"></div></div>
+          </div>
+          <div class="skill-cell">
+            <div class="skill-name">Flask</div>
+            <div class="skill-type">BACKEND</div>
+            <div class="skill-bar"><div class="skill-fill orange" style="--w:72%"></div></div>
+          </div>
+          <div class="skill-cell">
+            <div class="skill-name">Tailwind CSS</div>
+            <div class="skill-type">FRONTEND</div>
+            <div class="skill-bar"><div class="skill-fill purple" style="--w:88%"></div></div>
+          </div>
+          <div class="skill-cell">
+            <div class="skill-name">MySQL</div>
+            <div class="skill-type">DATABASE</div>
+            <div class="skill-bar"><div class="skill-fill orange" style="--w:68%"></div></div>
+          </div>
+          <div class="skill-cell">
+            <div class="skill-name">Git / GitHub</div>
+            <div class="skill-type">TOOLS</div>
+            <div class="skill-bar"><div class="skill-fill purple" style="--w:92%"></div></div>
+          </div>
+        </div>
+        <div class="code-block" style="margin-top: 1px;">
+          <span class="line">} <span class="cm">// end techStack</span></span>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects">
+        <div class="sec-header">
+          <span class="sec-num">03</span>
+          <span class="sec-comment">// repos/ — open source projects</span>
+          <div class="sec-line"></div>
+        </div>
+
+        <div class="project-grid fade-in" data-delay="1">
+          <a href="https://github.com/fahadhaya72/FusionConnect" target="_blank" class="project-card">
+            <div class="project-lang"><span class="lang-dot" style="background:#f1e05a"></span>JavaScript</div>
+            <div class="project-name"><i class="fas fa-link" style="font-size:10px; color:var(--text-muted)"></i> FusionConnect</div>
+            <div class="project-desc">Full-stack collaboration platform — real-time messaging, meetings, file sharing, scalable MERN architecture.</div>
+            <div class="project-stats"><span>⭐ featured</span><span>🔗 MERN</span></div>
+          </a>
+          <a href="https://github.com/fahadhaya72/SafeExtension" target="_blank" class="project-card">
+            <div class="project-lang"><span class="lang-dot" style="background:#f1e05a"></span>JavaScript</div>
+            <div class="project-name"><i class="fas fa-link" style="font-size:10px; color:var(--text-muted)"></i> SafeExtension</div>
+            <div class="project-desc">Browser extension detecting suspicious sites, providing real-time security awareness with lightweight protection.</div>
+            <div class="project-stats"><span>🛡 security</span><span>🔗 Chrome API</span></div>
+          </a>
+          <a href="https://github.com/fahadhaya72/Network-Vulnerability-Scanner" target="_blank" class="project-card">
+            <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
+            <div class="project-name"><i class="fas fa-link" style="font-size:10px; color:var(--text-muted)"></i> NetVuln Scanner</div>
+            <div class="project-desc">Network vulnerability scanner using nmap and CVE database integration for threat detection.</div>
+            <div class="project-stats"><span>🔍 nmap</span><span>🔗 CVE DB</span></div>
+          </a>
+          <a href="https://github.com/fahadhaya72/Device-Safety-Checker" target="_blank" class="project-card">
+            <div class="project-lang"><span class="lang-dot" style="background:#e34c26"></span>HTML</div>
+            <div class="project-name"><i class="fas fa-link" style="font-size:10px; color:var(--text-muted)"></i> Device Safety Checker</div>
+            <div class="project-desc">Web tool scanning connected devices for threats, displaying real-time system safety percentage.</div>
+            <div class="project-stats"><span>🔒 IoT</span><span>🔗 Web</span></div>
+          </a>
+          <a href="https://github.com/fahadhaya72/Speak_recognize" target="_blank" class="project-card">
+            <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
+            <div class="project-name"><i class="fas fa-link" style="font-size:10px; color:var(--text-muted)"></i> Speak Recognizer</div>
+            <div class="project-desc">Speech-to-text assistant using gTTS, continuous listening loop with voice command support.</div>
+            <div class="project-stats"><span>🎤 AI/ML</span><span>🔗 gTTS</span></div>
+          </a>
+          <a href="https://github.com/fahadhaya72/dynamic-portfolio" target="_blank" class="project-card">
+            <div class="project-lang"><span class="lang-dot" style="background:#f1e05a"></span>JavaScript</div>
+            <div class="project-name"><i class="fas fa-link" style="font-size:10px; color:var(--text-muted)"></i> Dynamic Portfolio</div>
+            <div class="project-desc">SPA template with dynamic content loading and live deployment pipeline via Vercel.</div>
+            <div class="project-stats"><span>🚀 Vercel</span><span>🔗 SPA</span></div>
+          </a>
+        </div>
+      </section>
+
+      <!-- CERTIFICATIONS -->
+      <section id="certs">
+        <div class="sec-header">
+          <span class="sec-num">04</span>
+          <span class="sec-comment">// certs.log — verified credentials</span>
+          <div class="sec-line"></div>
+        </div>
+
+        <div class="cert-list fade-in">
+          <div class="cert-item">
+            <div class="cert-left">
+              <div class="cert-icon" style="color:var(--orange)"><i class="fab fa-aws"></i></div>
               <div>
-                <h4>Education</h4>
-                <p>BTech in Inforamtion Technology</p>
-                <p>Parul University (2023-2027)</p>
+                <div class="cert-name">AWS Certified Cloud Practitioner</div>
+                <div class="cert-issuer">Amazon Web Services · Mar 2023 – Mar 2026</div>
               </div>
             </div>
+            <span class="cert-status valid">VALID</span>
           </div>
-          
-          <div class="about-cta">
-            <a href="#contact" class="btn btn-primary">Hire Me</a>
-            <a href="FHDresume.pdf" class="btn btn-outline" id="downloadCvBtn" download="HayatFahadIsmailResume.pdf">Download CV</a>
+          <div class="cert-item">
+            <div class="cert-left">
+              <div class="cert-icon" style="color:var(--blue)"><i class="fab fa-google"></i></div>
+              <div>
+                <div class="cert-name">Google Cloud Associate Engineer</div>
+                <div class="cert-issuer">Google Cloud · Jun 2023 – Jun 2025</div>
+              </div>
+            </div>
+            <span class="cert-status expired">EXPIRED</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-left">
+              <div class="cert-icon" style="color:var(--blue)"><i class="fab fa-microsoft"></i></div>
+              <div>
+                <div class="cert-name">Microsoft Certified: Azure Fundamentals</div>
+                <div class="cert-issuer">Microsoft · Sep 2023 – Sep 2025</div>
+              </div>
+            </div>
+            <span class="cert-status expired">EXPIRED</span>
           </div>
         </div>
-      </div>
-    </div>
-    
-    <!-- <div class="section-shape">
-      <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512,52.58,583,67.3c104.3,18.79,182.3,10.13,222.9-4.72,54.3-19.85,108-47.58,182.2-50.76,96.2-4.14,187.9,25.1,271.9,50.6V0Z" opacity=".25"></path>
-        <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"></path>
-        <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"></path>
-      </svg>
-    </div> -->
-  </section>
+      </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="section glass fade-in">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Project</h2>
-        <p class="section-subtitle">Open source projects</p>
-      </div>
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="sec-header">
+          <span class="sec-num">05</span>
+          <span class="sec-comment">// contact.sh — let's connect</span>
+          <div class="sec-line"></div>
+        </div>
 
+        <div class="contact-grid fade-in">
+          <div class="contact-cell">
+            <div class="contact-label">EMAIL</div>
+            <a href="mailto:cyberfahad72@gmail.com">cyberfahad72@gmail.com</a>
+          </div>
+          <div class="contact-cell">
+            <div class="contact-label">PHONE</div>
+            <span style="font-size:13px; color:var(--text-dim)">+91 8320295586</span>
+          </div>
+          <div class="contact-cell">
+            <div class="contact-label">LOCATION</div>
+            <span style="font-size:13px; color:var(--text-dim)">Godhra, Gujarat, India</span>
+          </div>
+          <div class="contact-cell">
+            <div class="contact-label">SOCIAL</div>
+            <div style="display:flex; gap:14px;">
+              <a href="https://linkedin.com/in/fahadhayat" target="_blank" style="color:var(--blue); font-size:13px;">LinkedIn</a>
+              <a href="https://github.com/fahadhaya72" target="_blank" style="color:var(--text-dim); font-size:13px;">GitHub</a>
+              <a href="https://twitter.com/fahadhayat" target="_blank" style="color:var(--text-dim); font-size:13px;">Twitter</a>
+            </div>
+          </div>
+        </div>
 
+        <!-- INTERACTIVE TERMINAL -->
+        <div class="terminal fade-in" data-delay="2">
+          <div class="term-bar">
+            <div class="traffic-lights"><div class="tl red"></div><div class="tl yellow"></div><div class="tl green"></div></div>
+            <span class="term-title">bash — contact terminal</span>
+          </div>
+          <div class="term-body" id="termOutput">
+            <div class="term-line">
+              <span class="term-ps1">fahad@dev:~$</span>
+              <span class="term-cmd">./contact --interactive</span>
+            </div>
+            <div class="term-out">
+              <span class="g">✔</span> Contact terminal initialized<br>
+              <span class="d">Type a command below. Try: </span><span class="b">help</span>, <span class="b">email</span>, <span class="b">hire</span>, <span class="b">whoami</span>
+            </div>
+            <div class="term-input">
+              <span class="term-ps1">fahad@dev:~$</span>
+              <input type="text" id="termCmd" placeholder="type a command..." autocomplete="off" spellcheck="false">
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <div class="card-grid">
-  
-      <div class="card">
-        <h4>Dynamic Portfolio</h4>
-        <p>SPA template with dynamic content and live deployment on Vercel.</p>
-        <a href="https://github.com/fahadhaya72/dynamic-portfolio" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
-      </div>
-      <div class="card">
-        <h4>Speak Recognizer</h4>
-        <p>Speech-to-text assistant using Python (gTTS), continuous listening.</p>
-        <a href="https://github.com/fahadhaya72/Speak_recognize" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
-      </div>
-      <div class="card">
-        <h4>Wireless Devices</h4>
-        <p>IoT-focused project showcasing wireless devices and connectivity logic.</p>
-        <a href="https://github.com/fahadhaya72/wireless_devices" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
-      </div>
-      <!-- Newly added projects -->
-      <div class="card">
-        <h4>Device Safety Checker</h4>
-        <p>Web-based tool that scans connected devices for potential threats and shows system safety percentage.</p>
-        <a href="https://github.com/fahadhaya72/Device-Safety-Checker" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
-      </div>
-      <div class="card">
-  <h4>FusionConnect</h4>
-  <p>
-    A full-stack collaboration and social platform with real-time messaging,
-    meetings, file sharing, authentication, and scalable API architecture.
-    Built using the MERN stack with modern UI/UX and production-ready structure.
-  </p>
-  <a href="https://github.com/fahadhaya72/FusionConnect" target="_blank">
-    <i class="fab fa-github"></i> View on GitHub
-  </a>
+    </div><!-- /content -->
+
+  </main>
 </div>
 
-<div class="card">
-  <h4>SafeExtension</h4>
-  <p>
-    A cybersecurity-focused browser extension designed to detect suspicious
-    websites, improve browsing safety, and provide real-time security awareness
-    with lightweight and user-friendly protection features.
-  </p>
-  <a href="https://github.com/fahadhaya72/SafeExtension" target="_blank">
-    <i class="fab fa-github"></i> View on GitHub
-  </a>
+<!-- FOOTER -->
+<div class="footer-bar">
+  <span>© 2025 Fahad Hayat</span>
+  <span style="color:var(--text-muted)">main ● <span>TypeScript</span> · UTF-8 · LF</span>
+  <span>Built with <span>♥</span> + lots of ☕</span>
 </div>
-      <div class="card">
-        <h4>Network Vulnerability Scanner</h4>
-        <p>Python-based scanner for detecting network vulnerabilities using nmap and CVE database integration.</p>
-        <a href="https://github.com/fahadhaya72/Network-Vulnerability-Scanner" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
-      </div>
-      
-    </div>
-  </section>
 
-  <!-- Experience Section -->
-  <section id="experience" class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Work Experience</h2>
-        <p class="section-subtitle">My professional journey</p>
-      </div>
-      
-      <div class="timeline">
-      
-        <!-- Experience 1 -->
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">Nov 2024 - May 2025</div>
-          <div class="timeline-content">
-            <h3>Frontend Developer Intern</h3>
-            <h4>Rapido - Vadodara</h4>
-            <ul>
-              <li>Developed and maintained responsive web applications using React.js and TypeScript</li>
-              <li>Collaborated with UI/UX designers to implement pixel-perfect interfaces</li>
-              <li>Optimized application performance and improved load times by 30%</li>
-              <li>Participated in code reviews and contributed to team knowledge sharing</li>
-            </ul>
-            <div class="timeline-tech">
-              <span>React.js</span>
-              <span>Material-UI</span>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Experience 2 -->
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">May 2025 - Sept 2025</div>
-          <div class="timeline-content">
-            <h3>Senior Web Developer</h3>
-            <h4>FuelFlux Technology</h4>
-            <ul>
-              <li>Assisted in developing and maintaining client websites using MERN.js</li>
-              <li>Implemented responsive designs and cross-browser compatibility</li>
-              <li>Worked with MERN to create and customize themes and plugins</li>
-              <li>Collaborated with the marketing team to implement SEO best practices</li>
-            </ul>
-            <div class="timeline-tech">
-              <span>React</span>
-              <span>tailwind</span>
-              <span>JavaScript & Node(express)</span>
-              <span>MongoDB</span>
-            </div>
-          </div>
-        </div>
-      </div>
+<script>
+  // CURSOR
+  const cur = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cur.style.left = e.clientX + 'px';
+    cur.style.top = e.clientY + 'px';
+  });
+  document.addEventListener('mousedown', () => cur.style.opacity = '0.4');
+  document.addEventListener('mouseup', () => cur.style.opacity = '0.9');
 
-        <!-- Experience 3 -->
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">May 2025 - Present</div>
-          <div class="timeline-content">
-            <h3>Freelance Full-Stack Developer</h3>
-            <h4>Self-Employed</h4>
-            <ul>
-              <li>Developed and deployed full-stack web applications using modern technologies including React.js, Node.js, and MongoDB</li>
-              <li>Collaborated with clients to understand requirements and deliver customized solutions</li>
-              <li>Implemented responsive designs and optimized applications for performance</li>
-              <li>Integrated third-party APIs and payment gateways for e-commerce solutions</li>
-              <li>Maintained 5/5 client satisfaction rating for quality and timely delivery</li>
-            </ul>
-            <div class="timeline-tech">
-              <span>React.js</span>
-              <span>Node.js</span>
-              <span>MongoDB</span>
-              <span>REST APIs</span>
-            </div>
-          </div>
-        </div>
-        
-      <div class="experience-cta">
-        <a href="#contact" class="btn btn-primary">Let's Work Together</a>
-      </div>
-    </div>
-    
-    <!-- <div class="section-shape">
-      <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512,52.58,583,67.3c104.3,18.79,182.3,10.13,222.9-4.72,54.3-19.85,108-47.58,182.2-50.76,96.2-4.14,187.9,25.1,271.9,50.6V0Z" opacity=".25"></path>
-        <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"></path>
-        <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"></path>
-      </svg>
-    </div> -->
-  </section>
+  // TERMINAL
+  const termOutput = document.getElementById('termOutput');
+  const termCmd = document.getElementById('termCmd');
 
-  <!-- Skills Section -->
-  <section id="skills" class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">My Skills</h2>
-        <p class="section-subtitle">Technologies I work with</p>
-      </div>
-      
-      <div class="skills-container">
-        <!-- Frontend Card -->
-        <div class="skills-category-card">
-          <div class="skills-card-header">
-            <h3>Frontend Technologies</h3>
-            <i class="fas fa-laptop-code"></i>
-          </div>
-          <div class="skills-card-body">
-            <div class="skill-item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
-              <span>React</span>
-            </div>
-            <div class="skill-item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />
-              <span>JavaScript</span>
-            </div>
-            <div class="skill-item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" />
-              <span>HTML5</span>
-            </div>
-            <div class="skill-item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" />
-              <span>CSS3</span>
-            </div>
-          </div>
-        </div>
+  const commands = {
+    help: () => `<span class="b">Available commands:</span><br>
+<span class="g">  whoami</span>    → about Fahad<br>
+<span class="g">  email</span>     → get email address<br>
+<span class="g">  hire</span>      → hiring information<br>
+<span class="g">  skills</span>    → print skill list<br>
+<span class="g">  github</span>    → open GitHub<br>
+<span class="g">  linkedin</span>  → open LinkedIn<br>
+<span class="g">  clear</span>     → clear terminal`,
 
-        <!-- Backend Card -->
-        <div class="skills-category-card">
-          <div class="skills-card-header">
-            <h3>Backend Technologies</h3>
-            <i class="fas fa-server"></i>
-          </div>
-          <div class="skills-card-body">
-            <div class="skill-item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" />
-              <span>Node.js</span>
-            </div>
-            <div class="skill-item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express" />
-              <span>Express</span>
-            </div>
-            <div class="skill-item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
-              <span>Python</span>
-            </div>
-            <div class="skill-item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" alt="Flask" />
-              <span>Flask</span>
-            </div>
-          </div>
-        </div>
+    whoami: () => `<span class="g">fahad hayat</span> — Full-Stack Developer<br>
+<span class="d">2+ yrs exp · MERN · Cloud · Vadodara, IN</span><br>
+<span class="d">Currently: freelancing + open to full-time roles</span>`,
 
-        <!-- Database & Cloud Card -->
-        <div class="skills-category-card">
-          <div class="skills-card-header">
-            <h3>Database & Cloud</h3>
-            <i class="fas fa-database"></i>
-          </div>
-          <div class="skills-card-body">
-            <div class="skill-item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" />
-              <span>MongoDB</span>
-            </div>
-            <div class="skill-item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS" />
-              <span>AWS</span>
-            </div>
-            <div class="skill-item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" />
-              <span>MySQL</span>
-            </div>
-            <div class="skill-item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" />
-              <span>Docker</span>
-            </div>
-          </div>
-        </div>
+    email: () => `<span class="b">cyberfahad72@gmail.com</span> <span class="d">[copied to clipboard]</span>`,
 
-        <!-- Tools Card -->
-        <div class="skills-category-card">
-          <div class="skills-card-header">
-            <h3>Developer Tools</h3>
-            <i class="fas fa-tools"></i>
-          </div>
-          <div class="skills-card-body">
-            <div class="skill-item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" />
-              <span>Git</span>
-            </div>
-            <div class="skill-item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" />
-              <span>VS Code</span>
-            </div>
-            <div class="skill-item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg" alt="npm" />
-              <span>npm</span>
-            </div>
-            <div class="skill-item">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" />
-              <span>GitHub</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    hire: () => `<span class="g">✔</span> Available for full-time, contract & freelance work<br>
+<span class="d">Specialties: MERN stack, cloud, cybersecurity tools</span><br>
+<span class="d">→</span> <span class="b">cyberfahad72@gmail.com</span> or <span class="b">+91 8320295586</span>`,
 
-  <!-- Certifications Section -->
-  <section id="certifications" class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Certifications</h2>
-        <p class="section-subtitle">My professional certifications</p>
-      </div>
-      <div class="certifications-container">
-        <div class="certification-item">
-          <div class="certification-header">
-            <h3>AWS Certified Cloud Practitioner</h3>
-            <span class="date">Issued Mar 2023 · Expires Mar 2026</span>
-          </div>
-          <div class="certification-body">
-            <p>Validated my knowledge and skills in cloud computing, including security, architecture, and deployment.</p>
-            <a href="#" class="credential" target="_blank">View Credential</a>
-          </div>
-        </div>
+    skills: () => `React · Node.js · MongoDB · Express<br>
+Python · Flask · AWS · Docker · MySQL<br>
+TypeScript · Tailwind · Git · REST APIs`,
 
-        <div class="certification-item">
-          <div class="certification-header">
-            <h3>Google Cloud Associate Engineer</h3>
-            <span class="date">Issued Jun 2023 · Expires Jun 2025</span>
-          </div>
-          <div class="certification-body">
-            <p>Demonstrated my ability to design, build, and manage cloud-based systems and applications.</p>
-            <a href="#" class="credential" target="_blank">View Credential</a>
-          </div>
-        </div>
+    github: () => { window.open('https://github.com/fahadhaya72', '_blank'); return `<span class="g">→</span> Opening github.com/fahadhaya72...`; },
 
-        <div class="certification-item">
-          <div class="certification-header">
-            <h3>Microsoft Certified: Azure Fundamentals</h3>
-            <span class="date">Issued Sep 2023 · Expires Sep 2025</span>
-          </div>
-          <div class="certification-body">
-            <p>Verified my understanding of cloud computing concepts, including security, compliance, and pricing.</p>
-            <a href="#" class="credential" target="_blank">View Credential</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    linkedin: () => { window.open('https://linkedin.com/in/fahadhayat', '_blank'); return `<span class="g">→</span> Opening linkedin.com/in/fahadhayat...`; },
 
-  <!-- Contact Section -->
-  <section id="contact" class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Get In Touch</h2>
-        <p class="section-subtitle">Let's work together</p>
-      </div>
-      
-      <div class="contact-container">
-        <div class="contact-info">
-          <div class="contact-item">
-            <i class="fas fa-envelope"></i>
-            <div>
-              <h3>Email</h3>
-              <a href="mailto:cyberfahad72@gmail.com">cyberfahad72@gmail.com</a>
-            </div>
-          </div>
-          
-          <div class="contact-item">
-            <i class="fas fa-phone"></i>
-            <div>
-              <h3>Phone</h3>
-              <p>+91 8320295586</p>
-            </div>
-          </div>
-          
-          <div class="contact-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <div>
-              <h3>Location</h3>
-              <p>Godhra , Gujarat</p>
-            </div>
-          </div>
-          
-          <div class="contact-social">
-            <a href="https://linkedin.com/in/fahadhayat" class="social-icon" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://github.com/fahadhaya72" class="social-icon" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://twitter.com/fahadhayat" class="social-icon" target="_blank"><i class="fab fa-twitter"></i></a>
-          </div>
-        </div>
-        
-        <div class="contact-form">
-          <form id="contactForm">
-            <div class="form-group">
-              <input type="text" id="name" name="name" required>
-              <label for="name">Your Name</label>
-            </div>
-            
-            <div class="form-group">
-              <input type="email" id="email" name="email" required>
-              <label for="email">Your Email</label>
-            </div>
-            
-            <div class="form-group">
-              <input type="text" id="subject" name="subject" required>
-              <label for="subject">Subject</label>
-            </div>
-            
-            <div class="form-group">
-              <textarea id="message" name="message" rows="5" required></textarea>
-              <label for="message">Your Message</label>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Send Message</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
+    clear: () => '__clear__',
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-particles" id="footerParticles"></div>
-    <div class="footer-container">
-      <div class="footer-logo">
-        <!-- <a href="#" class="logo">FH</a>
-        <p>Full-Stack Developer & Cloud Enthusiast</p> -->
-      </div>
-      <div class="footer-links">
-        <div class="footer-section">
-          <h4>Navigation</h4>
-          <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h4>Connect</h4>
-          <ul>
-            <li><a href="https://github.com/fahadhaya72" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-            <li><a href="https://linkedin.com/in/fahadhayat" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-            <li><a href="https://twitter.com/fahadhayat" target="_blank" rel="noopener noreferrer">Twitter</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Fahad Hayat. All rights reserved.</p>
-      <p>Built with &hearts; and &coffee; by Fahad Hayat</p>
-    </div>
-  </footer>
+    ls: () => `about.ts  work.diff  tech.json  repos/  certs.log  contact.sh`,
+    pwd: () => `/home/fahad/portfolio`,
+    date: () => new Date().toLocaleString(),
+  };
 
-  <script src="https://unpkg.com/scrollreveal"></script>
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-  <script src="main.js"></script>
+  function addLine(ps1, cmd, out) {
+    const lStr = `<div class="term-line"><span class="term-ps1">${ps1}</span><span class="term-cmd">${cmd}</span></div>`;
+    const oStr = `<div class="term-out">${out}</div>`;
+    const inputEl = termOutput.querySelector('.term-input');
+    inputEl.insertAdjacentHTML('beforebegin', lStr + oStr);
+  }
 
-  <script>
-    const nameTarget = document.getElementById("animated-name");
-    const names = ["<span style='color:#00bcd4'>Fahad Hayat</span>", "<span style='color:#00bcd4'>a Problem Solver</span>", "<span style='color:#00bcd4'>a Cloud Enthusiast</span>", "<span style='color:#00bcd4'>a MERN Developer</span>"];
-    let index = 0;
-    let charIndex = names[0].replace(/<[^>]+>/g, '').length;
-    let forward = false;
+  termCmd.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      const val = termCmd.value.trim().toLowerCase();
+      termCmd.value = '';
+      if (!val) return;
 
-    function animateName() {
-      const plainText = names[index].replace(/<[^>]+>/g, '');
-      const sliced = plainText.substring(0, charIndex);
-      const colored = names[index].replace(plainText, sliced);
-      nameTarget.innerHTML = colored;
-
-      if (forward) {
-        charIndex++;
-        if (charIndex > plainText.length) {
-          forward = false;
-          setTimeout(animateName, 1500);
-          return;
-        }
-      } else {
-        charIndex--;
-        if (charIndex < 0) {
-          forward = true;
-          index = (index + 1) % names.length;
-          setTimeout(animateName, 500);
-          return;
-        }
-      }
-      setTimeout(animateName, 100);
-    }
-    animateName();
-
-    function toggleTheme() {
-      document.body.classList.toggle('light');
-    }
-  </script>
-
-  <script>
-    // Handle CV download
-    document.getElementById('downloadCvBtn').addEventListener('click', function(e) {
-      const cvUrl = this.getAttribute('href');
-      const fileName = this.getAttribute('download');
-      
-      // Create a temporary link element to trigger download
-      const link = document.createElement('a');
-      link.href = cvUrl;
-      link.download = fileName || 'Resume.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      // If file doesn't exist, notify user
-      fetch(cvUrl, { method: 'HEAD' })
-        .then(response => {
-          if (!response.ok) {
-            alert('Resume file not found. Please contact the site owner.');
-          }
-        })
-        .catch(() => {
-          console.log('Resume download initiated');
-        });
-    });
-
-    // Footer particles animation
-    document.addEventListener('DOMContentLoaded', () => {
-      const particlesContainer = document.getElementById('footerParticles');
-      const particleCount = 20;
-      
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('footer-particle');
-        
-        // Random properties
-        const size = Math.random() * 5 + 2;
-        const posX = Math.random() * 100;
-        const delay = Math.random() * 15;
-        const duration = 15 + Math.random() * 20;
-        
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.left = `${posX}%`;
-        particle.style.bottom = `-${size}px`;
-        particle.style.animationDelay = `${delay}s`;
-        particle.style.animationDuration = `${duration}s`;
-        
-        particlesContainer.appendChild(particle);
-      }
-    });
-  </script>
-
-  <!-- Back To Top Button -->
-  <button id="backToTop" class="back-to-top" aria-label="Back to top">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-
-  <script>
-    // Typing animation for name
-    const words = ['Fahad Hayat', 'Full-Stack Dev', 'Cloud Enthusiast', 'Problem Solver', 'Tech Lover'];
-    let part = '';
-    let i = 0;
-    let offset = 0;
-    let forwards = true;
-    let skip_count = 0;
-    const speed = 100;
-    const cursor = document.querySelector('.cursor');
-    const typingElement = document.querySelector('#typing-text');
-    
-    // Initialize with first word
-    typingElement.textContent = words[0];
-    
-    function animate() {
-      if (forwards) {
-        if (offset >= words[i].length) {
-          skip_count++;
-          if (skip_count === 15) { 
-            forwards = false;
-            skip_count = 0;
-          }
-        }
-      } else {
-        if (offset === 0) {
-          forwards = true;
-          i = (i + 1) % words.length; 
-          offset = 0;
-        }
-      }
-      
-      part = words[i].substr(0, offset);
-      if (skip_count === 0) {
-        if (forwards) {
-          offset++;
+      if (commands[val]) {
+        const result = commands[val]();
+        if (result === '__clear__') {
+          const lines = termOutput.querySelectorAll('.term-line:not(:last-child), .term-out');
+          lines.forEach(l => l.remove());
         } else {
-          offset--;
+          addLine('fahad@dev:~$', val, result);
         }
+        if (val === 'email') {
+          navigator.clipboard?.writeText('cyberfahad72@gmail.com').catch(()=>{});
+        }
+      } else {
+        addLine('fahad@dev:~$', val, `<span style="color:var(--red)">bash: ${val}: command not found</span> (try <span class="b">help</span>)`);
       }
-      
-      typingElement.textContent = part;
-      setTimeout(animate, speed);
+      termOutput.scrollTop = termOutput.scrollHeight;
     }
-    
-    // Start animation after slight delay
-    setTimeout(() => {
-      cursor.style.display = 'inline-block';
-      animate();
-    }, 1000);
-  </script>
+  });
 
-  <script>
-    // Timeline scroll animation
-    document.addEventListener('DOMContentLoaded', () => {
-      const timeline = document.querySelector('.timeline');
-      const timelineItems = document.querySelectorAll('.timeline-item');
-      
-      // Activate timeline line on first scroll
-      let timelineActivated = false;
-      
-      const activateTimeline = () => {
-        if (!timelineActivated) {
-          timeline.classList.add('animated');
-          timelineActivated = true;
-        }
-      };
-      
-      // Check if timeline items are in view
-      const checkVisibility = () => {
-        timelineItems.forEach(item => {
-          const itemTop = item.getBoundingClientRect().top;
-          const itemBottom = item.getBoundingClientRect().bottom;
-          
-          if (itemTop < window.innerHeight * 0.8 && itemBottom > 0) {
-            item.classList.add('visible');
-            activateTimeline();
-          }
-        });
-      };
-      
-      // Initial check
-      checkVisibility();
-      
-      // Scroll event listener
-      window.addEventListener('scroll', () => {
-        checkVisibility();
-      });
-      
-      // Initialize ScrollReveal
-      ScrollReveal().reveal('.timeline-item', {
-        delay: 200,
-        distance: '20px',
-        origin: 'bottom',
-        interval: 100
-      });
+  // SIDEBAR ACTIVE on scroll
+  const sections = document.querySelectorAll('section');
+  const sideItems = document.querySelectorAll('.sidebar-item');
+  const tabItems = document.querySelectorAll('.tab');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
     });
-  </script>
+    sideItems.forEach(item => {
+      item.classList.toggle('active', item.getAttribute('href') === '#' + current);
+    });
+    tabItems.forEach(tab => {
+      const href = tab.getAttribute('href');
+      const map = { '#about': 'about', '#experience': 'experience', '#projects': 'projects', '#skills': 'skills', '#contact': 'contact' };
+      tab.classList.toggle('active', map[href] === current || (href === '#skills' && current === 'skills'));
+    });
+  });
+
+  // INTERSECTION OBSERVER for fade-ins
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.style.animationPlayState = 'running'; });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => {
+    el.style.animationPlayState = 'paused';
+    obs.observe(el);
+  });
+</script>
 </body>
 </html>
