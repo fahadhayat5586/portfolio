@@ -69,7 +69,7 @@ If you'd like to collaborate or get in touch:
 
 - 🔗 [GitHub](https://github.com/fahadhayat5586)
 - ✉️ Email: cyberfahad72@gmail.com
-- 💼 LinkedIn: *Coming soon*
+- 💼 LinkedIn: [LinkedIn](https://linkedin.com/in/fahad-hayat-6430962aa)
 
 ---
 
